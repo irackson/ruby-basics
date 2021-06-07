@@ -188,7 +188,10 @@ puts "def prime_callback(wants_to_check_prime, int) \n\twants_to_check_prime ? c
 
 # ! Hungry For More?
 # * Pandigital Numbers
-def pandigital?(nums, pan_n)
+# rubocop:disable Metrics/CyclomaticComplexity
+def pandigital?(nums, pan_n) # rubocop:disable Metrics/AbcSize
+  return true if (nums == 1) && (pan_n == 1)
+
   arr = nums.to_s.split('').collect(&:to_i).sort
   return false if arr.length != pan_n || arr[0] != 1 || arr.last == arr[0] || arr.last != pan_n
 
@@ -199,3 +202,5 @@ puts "def pandigital?(nums, pan_n) \n\tarr = nums.to_s.split('').collect(&:to_i)
 puts "\treturn false if arr.length != pan_n || arr[0] != 1 || arr.last == arr[0] || arr.last != pan_n"
 puts "\tarr == (arr.first..pan_n).to_a"
 puts 'end'
+p pandigital?(1, 1)
+# rubocop:enable Metrics/CyclomaticComplexity
